@@ -1,3 +1,4 @@
+from IPython.core.display import display
 from pymongo import MongoClient
 from config import mongoURI
 import pandas as pd
@@ -10,4 +11,12 @@ docs = collection_name.find().limit(10)
 
 df = pd.DataFrame(docs)
 
-print(df)
+# print(df.head())
+
+df['Age'] = 2021 - df['Year_Birth']
+df = df.rename(columns={'MntWines': "Wines", 'MntFruits':'Fruits', 'MntMeatProducts':'Meat',
+ 'MntFishProducts':'Fish', 'MntSweetProducts':'Sweets', 'MntGoldProds':'Gold'})
+df = df.loc[:, ['Age', 'Wines', 'Fruits', 'Meat', 'Fish', 'Sweets', 'Gold']]
+# print(df)
+
+display(df)

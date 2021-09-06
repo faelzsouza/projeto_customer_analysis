@@ -12,6 +12,7 @@ collection_name = db_name['customers_analytics']
 
 docs = collection_name.find()
 
+#Análise da relação entre as compras pela internet e nível de escolaridade
 df = pd.DataFrame(docs)
 
 educacao = pd.DataFrame({'Até 5 compras': df[(df["NumWebPurchases"] <=5)]["Education"].value_counts(),
@@ -23,6 +24,7 @@ educacao = pd.DataFrame({'Até 5 compras': df[(df["NumWebPurchases"] <=5)]["Educ
 plt.style.use("ggplot")
 educacao.plot.barh()
 
+#Análise da relação entre as compras pela internet e estado cívil
 civil = pd.DataFrame({'Até 5 compras': df[(df["NumWebPurchases"] <=5)]["Marital_Status"].value_counts(),
                          'Entre 05 e 10 ': df[(df["NumWebPurchases"] >5) & (df["NumWebPurchases"] <10)]["Marital_Status"].value_counts(),
                          'Acima de 10': df[(df["NumWebPurchases"] >=10)]["Marital_Status"].value_counts()      
@@ -31,6 +33,7 @@ civil = pd.DataFrame({'Até 5 compras': df[(df["NumWebPurchases"] <=5)]["Marital
 plt.style.use("fivethirtyeight")
 civil.plot.barh()
 
+#Resumo dsa compras realizadas nesse período
 internet = df["NumWebPurchases"].sum()
 catalago = df["NumCatalogPurchases"].sum()
 loja = df["NumStorePurchases"].sum()
@@ -41,3 +44,5 @@ totais = pd.DataFrame({'Compras pela internet': [f'{internet:,}'.replace(',', '.
 })
 
 display(totais.style.hide_index())
+
+#autopct='%1.1f%%'

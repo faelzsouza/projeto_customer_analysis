@@ -58,8 +58,8 @@ campanhas = [
 df_totais = pd.DataFrame(campanhas, index=labels)
 totalrow = pd.DataFrame([df_totais.sum()], index=['Total'])
 display(df_totais.append(totalrow).style.hide_columns())
-df_totais.plot.pie(y=0, explode=(0, 0, 0, 0, 0, 0.1), autopct='%1.1f%%', figsize=(
-    9, 9), shadow=True, counterclock=False, label='Aceitação \npor campanhas', startangle=160)
+# df_totais.plot.pie(y=0, explode=(0, 0, 0, 0, 0, 0.1), autopct='%1.1f%%', figsize=(
+#     9, 9), shadow=True, counterclock=False, label='Aceitação \npor campanhas', startangle=160)
 
 # Barra horizontal do estado civil e educação 
 response_details = df[response == 1].loc[:, [
